@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speech Analysis Tool</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Speech Analysis Tool</h1>
+        <form method="POST" enctype="multipart/form-data">
+            <label for="audio_file" class="upload-label">Upload an audio file:</label>
+            <input type="file" id="audio_file" name="audio_file" accept="audio/*" required><br>
+            <button type="submit" class="analyze-button">Analyze</button>
+        </form>
+
+        {% if text %}
+        <div class="result-section sparkle-effect">
+            <h2>Transcribed Text:</h2>
+            <p class="text-output">{{ text }}</p>
+
+            <h2>Phonetic Transcription:</h2>
+            <p class="text-output">{{ phonetic }}</p>
+
+            <h2>Prosody Plot:</h2>
+            <img src="{{ plot_url }}" alt="Prosody Plot" class="prosody-plot">
+
+            <div class="buttons">
+                <a href="/" class="back-button">Back</a>
+                <a href="{{ download_url }}" class="download-button">Download Transcription</a>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
